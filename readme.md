@@ -6,7 +6,8 @@
 ![SSH](https://img.shields.io/badge/SSH-Port_2022-4A90E2?logo=openssh&logoColor=white)
 ![Netplan](https://img.shields.io/badge/Network-Netplan-orange)
 ![Status](https://img.shields.io/badge/Status-Completed-success)
-![License](https://img.shields.io/badge/License-Educational-blue)
+![Purpose](https://img.shields.io/badge/Purpose-Educational-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 
 >Production-ready Ubuntu Server deployment: static networking, SSH hardening, system monitoring, CRON automation. Foundation для Infrastructure as Code projects
@@ -29,66 +30,83 @@
 
 ## Архитектура/Схема
 
+
+```mermaid
+graph TD
+    A[Ubuntu Server 20.04<br/>blainbatmachine-1] --> B[Network Config]
+    B --> C[enp0s3: 10.0.2.20/24]
+    B --> D[lo: 127.0.0.1]
+    A --> E[System Services]
+    E --> F[SSH: 2022]
+    E --> G[NTP: GMT+3]
+    E --> H[CRON]
+    A --> I[Storage]
+    I --> J[/dev/sda 25GiB ext4]
+    I --> K[Swap 2.2GiB]
+
+```text
 ┌─────────────────────────────────────────────────────────────────┐
-│ Ubuntu Server 20.04 LTS │
-│ Hostname: blainbatmachine-1 │
+│                    Ubuntu Server 20.04 LTS                      │
+│                   Hostname: blainbatmachine-1                   │
 └─────────────────────────────────────────────────────────────────┘
-│
-│
-┌─────────────────────┴─────────────────────┐
-│ Network Configuration │
-│ ┌─────────────────────────────────────┐ │
-│ │ Interface: enp0s3 │ │
-│ │ IP: 10.0.2.20/24 (static) │ │
-│ │ Gateway: 10.0.2.2 │ │
-│ │ DNS: 1.1.1.1, 8.8.8.8 │ │
-│ │ Managed by: netplan (networkd) │ │
-│ └─────────────────────────────────────┘ │
-│ ┌─────────────────────────────────────┐ │
-│ │ Interface: lo (loopback) │ │
-│ │ IP: 127.0.0.1 │ │
-│ └─────────────────────────────────────┘ │
-└───────────────────────────────────────────┘
-│
-│
-┌─────────────────────┴─────────────────────┐
-│ System Services │
-│ ┌─────────────────────────────────────┐ │
-│ │ SSH Daemon (sshd) │ │
-│ │ Port: 2022 (custom) │ │
-│ │ State: active, autostart enabled │ │
-│ └─────────────────────────────────────┘ │
-│ ┌─────────────────────────────────────┐ │
-│ │ NTP Sync (systemd-timesyncd) │ │
-│ │ Timezone: Europe/Moscow (GMT+3) │ │
-│ └─────────────────────────────────────┘ │
-│ ┌─────────────────────────────────────┐ │
-│ │ CRON Scheduler │ │
-│ │ Задачи: по расписанию │ │
-│ └─────────────────────────────────────┘ │
-└───────────────────────────────────────────┘
-│
-│
-┌─────────────────────┴─────────────────────┐
-│ Storage & Monitoring │
-│ ┌─────────────────────────────────────┐ │
-│ │ Disk: /dev/sda (25 GiB) │ │
-│ │ Root: /dev/mapper/ubuntu--vg... │ │
-│ │ FS: ext4, Used: 48% │ │
-│ │ Swap: 2.2 GiB (file-based) │ │
-│ └─────────────────────────────────────┘ │
-│ ┌─────────────────────────────────────┐ │
-│ │ Monitoring: top, htop, ncdu │ │
-│ │ Logging: syslog, auth.log, dmesg │ │
-│ └─────────────────────────────────────┘ │
-└───────────────────────────────────────────┘
-│
-│
-┌─────────────────────┴─────────────────────┐
-│ User Management │
-│ Root (disabled login) │
-│ blainbat (sudo, adm groups) │
-└───────────────────────────────────────────┘
+                              │
+                              │
+        ┌─────────────────────┴─────────────────────┐
+        │         Network Configuration             │
+        │  ┌─────────────────────────────────────┐  │
+        │  │  Interface: enp0s3                  │  │
+        │  │  IP: 10.0.2.20/24 (static)          │  │
+        │  │  Gateway: 10.0.2.2                  │  │
+        │  │  DNS: 1.1.1.1, 8.8.8.8              │  │
+        │  │  Managed by: netplan (networkd)     │  │
+        │  └─────────────────────────────────────┘  │
+        │  ┌─────────────────────────────────────┐  │
+        │  │  Interface: lo (loopback)           │  │
+        │  │  IP: 127.0.0.1                      │  │
+        │  └─────────────────────────────────────┘  │
+        └───────────────────────────────────────────┘
+                              │
+                              │
+        ┌─────────────────────┴─────────────────────┐
+        │            System Services                │
+        │  ┌─────────────────────────────────────┐  │
+        │  │  SSH Daemon (sshd)                  │  │
+        │  │  Port: 2022 (custom)                │  │
+        │  │  State: active, autostart enabled   │  │
+        │  └─────────────────────────────────────┘  │
+        │  ┌─────────────────────────────────────┐  │
+        │  │  NTP Sync (systemd-timesyncd)       │  │
+        │  │  Timezone: Europe/Moscow (GMT+3)    │  │
+        │  └─────────────────────────────────────┘  │
+        │  ┌─────────────────────────────────────┐  │
+        │  │  CRON Scheduler                     │  │
+        │  │  Задачи: по расписанию              │  │
+        │  └─────────────────────────────────────┘  │
+        └───────────────────────────────────────────┘
+                              │
+                              │
+        ┌─────────────────────┴─────────────────────┐
+        │         Storage & Monitoring              │
+        │  ┌─────────────────────────────────────┐  │
+        │  │  Disk: /dev/sda (25 GiB)            │  │
+        │  │  Root: /dev/mapper/ubuntu--vg...    │  │
+        │  │  FS: ext4, Used: 48%                │  │
+        │  │  Swap: 2.2 GiB (file-based)         │  │
+        │  └─────────────────────────────────────┘  │
+        │  ┌─────────────────────────────────────┐  │
+        │  │  Monitoring: top, htop, ncdu        │  │
+        │  │  Logging: syslog, auth.log, dmesg   │  │
+        │  └─────────────────────────────────────┘  │
+        └───────────────────────────────────────────┘
+                              │
+                              │
+        ┌─────────────────────┴─────────────────────┐
+        │            User Management                │
+        │  Root (disabled login)                    │
+        │  blainbat (sudo, adm groups)              │
+        └───────────────────────────────────────────┘
+```
+
 
 ## Основные результаты
 
@@ -1146,5 +1164,6 @@
 
 
     - ![screen](<./misc/images/Pasted image 20260106125342.png>)
+
 
 
