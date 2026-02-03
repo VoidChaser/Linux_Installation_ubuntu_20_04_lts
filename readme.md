@@ -41,8 +41,10 @@ graph TD
     E --> G[NTP: GMT+3]
     E --> H[CRON]
     A --> I[Storage]
-    I --> J[/dev/sda 25GiB ext4]
-    I --> K[Swap 2.2GiB]
+    I --> J[Disk: sda 25GiB ext4]
+    I --> K[Swap: 2.2GiB file-based]
+    A --> L[Users]
+    L --> M[blainbat: sudo, adm]
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -1164,6 +1166,7 @@ graph TD
 
 
     - ![screen](<./misc/images/Pasted image 20260106125342.png>)
+
 
 
 
