@@ -45,6 +45,7 @@ graph TD
     I --> K[Swap: 2.2GiB file-based]
     A --> L[Users]
     L --> M[blainbat: sudo, adm]```
+    
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -1166,6 +1167,7 @@ graph TD
 
 
     - ![screen](<./misc/images/Pasted image 20260106125342.png>)
+
 
 
 
