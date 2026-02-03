@@ -32,19 +32,38 @@
 
 
 ```mermaid
-graph TD
-    A[Ubuntu Server 20.04<br/>blainbatmachine-1] --> B[Network Config]
-    B --> C[enp0s3: 10.0.2.20/24]
-    B --> D[lo: 127.0.0.1]
-    A --> E[System Services]
-    E --> F[SSH: 2022]
-    E --> G[NTP: GMT+3]
-    E --> H[CRON]
-    A --> I[Storage]
-    I --> J[Disk: sda 25GiB ext4]
-    I --> K[Swap: 2.2GiB file-based]
-    A --> L[Users]
-    L --> M[blainbat: sudo, adm]```
+graph TB
+    subgraph System[Ubuntu Server 20.04 LTS - blainbatmachine-1]
+        direction TB
+        A[Core System]
+    end
+    
+    subgraph Network[Network Layer]
+        B[enp0s3<br/>10.0.2.20/24]
+        C[Gateway: 10.0.2.2]
+        D[DNS: 1.1.1.1, 8.8.8.8]
+    end
+    
+    subgraph Services[System Services]
+        E[SSH Daemon<br/>Port 2022]
+        F[NTP Sync<br/>Moscow GMT+3]
+        G[CRON Scheduler]
+    end
+    
+    subgraph Storage[Storage & Monitoring]
+        H[Disk: sda 25GiB<br/>ext4, 48% used]
+        I[Swap: 2.2GiB<br/>file-based]
+        J[Monitoring:<br/>top, htop, ncdu]
+    end
+    
+    subgraph Users[User Management]
+        K[blainbat<br/>sudo, adm groups]
+    end
+    
+    A --> Network
+    A --> Services
+    A --> Storage
+    A --> Users
     
 
 ```text
@@ -1167,6 +1186,7 @@ graph TD
 
 
     - ![screen](<./misc/images/Pasted image 20260106125342.png>)
+
 
 
 
