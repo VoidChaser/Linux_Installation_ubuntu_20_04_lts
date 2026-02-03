@@ -33,27 +33,38 @@
 ### Логическая схема
 
 ```mermaid
-graph LR
-    A[Ubuntu Server 20.04 LTS<br/>blainbatmachine-1]
+***
+title: Ubuntu Server 20.04 LTS - blainbatmachine-1
+***
+graph TB
+    A[Core System]
     
-    A --> B[Network]
-    A --> C[Services]
-    A --> D[Storage]
-    A --> E[Users]
+    subgraph Network[Network Layer]
+        B[enp0s3<br/>10.0.2.20/24]
+        C[Gateway: 10.0.2.2]
+        D[DNS: 1.1.1.1, 8.8.8.8]
+    end
     
-    B --> B1[enp0s3: 10.0.2.20/24]
-    B --> B2[Gateway: 10.0.2.2]
-    B --> B3[DNS: 1.1.1.1, 8.8.8.8]
+    subgraph Services[System Services]
+        E[SSH Daemon<br/>Port 2022]
+        F[NTP Sync<br/>Moscow GMT+3]
+        G[CRON Scheduler]
+    end
     
-    C --> C1[SSH Port 2022]
-    C --> C2[NTP Moscow GMT+3]
-    C --> C3[CRON]
+    subgraph Storage[Storage & Monitoring]
+        H[Disk: sda 25GiB<br/>ext4, 48% used]
+        I[Swap: 2.2GiB<br/>file-based]
+        J[Monitoring:<br/>top, htop, ncdu]
+    end
     
-    D --> D1[sda 25GiB ext4]
-    D --> D2[Swap 2.2GiB]
-    D --> D3[top, htop, ncdu]
+    subgraph Users[User Management]
+        K[blainbat<br/>sudo, adm groups]
+    end
     
-    E --> E1[blainbat<br/>sudo, adm]
+    A --> Network
+    A --> Services
+    A --> Storage
+    A --> Users
 ```
     
 
@@ -1177,6 +1188,7 @@ graph LR
 
 
     - ![screen](<./misc/images/Pasted image 20260106125342.png>)
+
 
 
 
