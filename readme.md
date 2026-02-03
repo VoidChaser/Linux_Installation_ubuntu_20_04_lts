@@ -33,9 +33,6 @@
 ### Логическая схема
 
 ```mermaid
-***
-title: Ubuntu Server 20.04 LTS - blainbatmachine-1
-***
 graph TB
     A[Core System]
     
@@ -1188,6 +1185,7 @@ graph TB
 
 
     - ![screen](<./misc/images/Pasted image 20260106125342.png>)
+
 
 
 
