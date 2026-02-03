@@ -1,4 +1,4 @@
-# Отчет по проекту D01_Linux by Blainbat.
+# Отчет по проекту Linux_Installation_ubuntu_20_04_lts.
 
 
 ## Оглавление
@@ -956,5 +956,6 @@
 
 
     - Команда ``crontab -l`` подтверждает отсутствие задач (``no crontab for user``).
+
 
     - ![screen](<./misc/images/Pasted image 20260106125342.png>)
