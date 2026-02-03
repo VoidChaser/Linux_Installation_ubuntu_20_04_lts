@@ -27,7 +27,7 @@
 
 1.  **Проверка версии Ubuntu:**
     Выполнена команда ``cat /etc/issue``.
-    ![screen1](<../misc/images/Pasted image 20260105003605.png>)
+    ![screen1](<./misc/images/Pasted image 20260105003605.png>)
 
 2.  **Проверка отсутствия графического интерфейса:**
     Проверен статус служб графических менеджеров (lightdm, gdm, sddm) и наличие пакетов xorg/wayland.
@@ -43,7 +43,7 @@
     - ``systemctl status gdm``
 
     - ``dpkg -l | grep -E "xorg|wayland|gnome"``
-    ![screen](<../misc/images/Pasted image 20260105002711.png>)
+    ![screen](<./misc/images/Pasted image 20260105002711.png>)
         Результат: Службы не найдены, графическая оболочка отсутствует.
     
 
@@ -53,15 +53,15 @@
 
 1.  **Создание пользователя:**
     Выполнена команда ``sudo adduser blainbat``.
-    ![screen](<../misc/images/Pasted image 20260105003844.png>)
+    ![screen](<./misc/images/Pasted image 20260105003844.png>)
 
 2.  **Добавление в группу adm:**
     Выполнена команда ``sudo usermod -aG adm blainbat``.
-    ![screen](<../misc/images/Pasted image 20260105003904.png>)
+    ![screen](<./misc/images/Pasted image 20260105003904.png>)
 
 3.  **Проверка наличия пользователя:**
     Выполнена команда ``cat /etc/passwd``. В конце файла присутствует строка с созданным пользователем.
-    ![screen](<../misc/images/Pasted image 20260105003936.png>)
+    ![screen](<./misc/images/Pasted image 20260105003936.png>)
 
 ## Part 3. Настройка сети ОС
 
@@ -69,64 +69,64 @@
 
 - Установлено имя ``blainbat-1`` командой:
   ``sudo hostnamectl set-hostname blainbat-1``
-  ![screen](<../misc/images/Pasted image 20260105004027.png>)
+  ![screen](<./misc/images/Pasted image 20260105004027.png>)
 
 - Проверка изменений в файле ``/etc/hostname``:
-  ![screen](<../misc/images/Pasted image 20260105004047.png>)
+  ![screen](<./misc/images/Pasted image 20260105004047.png>)
 
 - Изменен файл ``/etc/hosts`` (заменено старое имя на новое):
 
 
 
 
-- ![screen](<../misc/images/Pasted image 20260105004141.png>)
+- ![screen](<./misc/images/Pasted image 20260105004141.png>)
 
 - Старая версия hosts
 
-- ![screen](<../misc/images/Pasted image 20260104213548.png>)
+- ![screen](<./misc/images/Pasted image 20260104213548.png>)
 
 - Новая версия hosts
-  ![screen](<../misc/images/Pasted image 20260105004211.png>)
+  ![screen](<./misc/images/Pasted image 20260105004211.png>)
 
 - Изменения в hosts сохранены.
 
 - Перезапущена служба имени машины командой ``sudo systemctl restart systemd-hostnamed``
 
-- ![screen](<../misc/images/Pasted image 20260105004253.png>)
+- ![screen](<./misc/images/Pasted image 20260105004253.png>)
 
 - Проверен факт установки нового имени машины командами ``hostname`` и ``hostnamectl``
 
-- ![screen](<../misc/images/Pasted image 20260105004313.png>)
+- ![screen](<./misc/images/Pasted image 20260105004313.png>)
 
 **2. Установка временной зоны.**
 
 - Просмотр текущей зоны: ``timedatectl status`` (UTC, +0).
 
-- ![screen](<../misc/images/Pasted image 20260105004330.png>)
+- ![screen](<./misc/images/Pasted image 20260105004330.png>)
 
 - Просмотрен список доступных временных зон командой ``timedatectl list-timezones`` и найдена временная зона Москвы, GMT(+3)
 
-- ![screen](<../misc/images/Pasted image 20260105004418.png>)
+- ![screen](<./misc/images/Pasted image 20260105004418.png>)
 
 - Установка временной зоны Москвы:
   ``sudo timedatectl set-timezone Europe/Moscow``
 
 - Проверка применения настроек (Time zone: Europe/Moscow):
-  ![screen](<../misc/images/Pasted image 20260105004507.png>)
+  ![screen](<./misc/images/Pasted image 20260105004507.png>)
 
 - Временная зона применена.
 
 **3. Сетевые интерфейсы.**
 
 - Вывод списка интерфейсов командой ``ip a``:
-  ![screen](<../misc/images/Pasted image 20260105004524.png>)
+  ![screen](<./misc/images/Pasted image 20260105004524.png>)
 
 - **Интерфейс lo (loopback):** Виртуальный интерфейс (127.0.0.1). Используется для внутренней коммуникации ОС и сетевых служб без выхода в физическую сеть.
 
 **4. Получение IP от DHCP.**
 
 - Команда ``ip a`` показывает полученный адрес: ``10.0.2.15/24`` в IPv4 и ``fd17:625c:f037:2:a00:27ff:fe90:49ab/64`` в IPv6.
-  ![screen](<../misc/images/Pasted image 20260105004630.png>)
+  ![screen](<./misc/images/Pasted image 20260105004630.png>)
 
 - **DHCP (Dynamic Host Configuration Protocol):** Протокол, позволяющий автоматически получать IP-адрес, шлюз и DNS от сервера при подключении к сети.
 
@@ -135,17 +135,17 @@
 - Выполнена команда ``ip r`` (или ``ip route``).
 
 - IP-адрес шлюза по умолчанию (default via): ``10.0.2.2``.
-  ![screen](<../misc/images/Pasted image 20260105004654.png>)
+  ![screen](<./misc/images/Pasted image 20260105004654.png>)
 
 **6. Задание статичных настроек (IP, GW, DNS).**
 
 - Просмотрено содержимое директории /etc/netplan командой ``ls /etc/netplan/``
 
-- ![screen](<../misc/images/Pasted image 20260105004727.png>)
+- ![screen](<./misc/images/Pasted image 20260105004727.png>)
 
 - Редактируемый файл: ``/etc/netplan/00-installer-config.yaml``.
 
-- ![screen](<../misc/images/Pasted image 20260105004753.png>)
+- ![screen](<./misc/images/Pasted image 20260105004753.png>)
 
 - Внесены изменения (отключен DHCP, заданы адреса вручную, включена статика):
 
@@ -161,11 +161,11 @@
   - Были явно прописаны -- Renderer сети: networkd, version (api netplan): 2
 
   - Добавлен параметр optional: true для ускорения загрузки виртуальной машины до полного подтверждения сети.
-  ![screen](<../misc/images/Pasted image 20260105005321.png>)
+  ![screen](<./misc/images/Pasted image 20260105005321.png>)
 
 - Отладка ошибок командой ``sudo netplan try`` не показала их наличия.
 
-- ![screen](<../misc/images/Pasted image 20260105005413.png>)
+- ![screen](<./misc/images/Pasted image 20260105005413.png>)
 
 - Применение настроек командой ``sudo netplan apply``.
 
@@ -174,21 +174,21 @@
 - Виртуальная машина перезагружена командой ``sudo reboot``.
 
 - Проверка IP (``ip a``): адрес соответствует заданному ``10.0.2.20``.
-  ![screen](<../misc/images/Pasted image 20260105005724.png>)
+  ![screen](<./misc/images/Pasted image 20260105005724.png>)
 
 - Проверка шлюза (``ip r``): шлюз ``10.0.2.2``. Протокол static.
-  ![screen](<../misc/images/Pasted image 20260105010037.png>)
+  ![screen](<./misc/images/Pasted image 20260105010037.png>)
 
 - Проверка DNS (``resolvectl status``): DNS-серверы ``1.1.1.1`` и ``8.8.8.8``.
-  ![screen](<../misc/images/Pasted image 20260105010126.png>)
+  ![screen](<./misc/images/Pasted image 20260105010126.png>)
 
 **8. Пинг удаленных хостов.**
 
 - Пинг ``1.1.1.1`` успешен **(0% packet loss):**
-  ![screen](<../misc/images/Pasted image 20260105010150.png>)
+  ![screen](<./misc/images/Pasted image 20260105010150.png>)
 
 - Пинг ``ya.ru`` успешен **(0% packet loss):**
-  ![screen](<../misc/images/Pasted image 20260105010218.png>)
+  ![screen](<./misc/images/Pasted image 20260105010218.png>)
 
 ## Part 4. Обновление ОС
 
@@ -196,16 +196,16 @@
 
 1.  **Поиск обновлений:**
     Выполнена команда ``sudo apt update``.
-    ![screen](<../misc/images/Pasted image 20260105010437.png>)
+    ![screen](<./misc/images/Pasted image 20260105010437.png>)
 
 2.  **Установка обновлений:**
     Выполнена команда ``sudo apt upgrade``. Подтверждена установка нажатием ``Y``.
-    ![screen](<../misc/images/Pasted image 20260105010505.png>)
-    ![screen](<../misc/images/Pasted image 20260105010604.png>)
+    ![screen](<./misc/images/Pasted image 20260105010505.png>)
+    ![screen](<./misc/images/Pasted image 20260105010604.png>)
 
 3.  **Финальная проверка:**
     Повторный запуск ``sudo apt update`` показывает отсутствие обновлений (All packages are up to date).
-    ![screen](<../misc/images/Pasted image 20260105010631.png>)
+    ![screen](<./misc/images/Pasted image 20260105010631.png>)
     **Успешно. Все пакеты обновлены.**
 
 ## Part 5. Использование команды sudo
@@ -214,35 +214,35 @@
 
 1.  **Выдача прав:**
     Пользователь blainbat добавлен в группу sudo командой ``sudo usermod -aG sudo blainbat``.
-    ![screen](<../misc/images/Pasted image 20260105010850.png>)
+    ![screen](<./misc/images/Pasted image 20260105010850.png>)
 
 2.  **Проверка прав:**
     После перезагрузки и авторизации под blainbat команда ``sudo whoami`` выполнена успешно от имени пользователя (результат ``root``).
-    ![screen](<../misc/images/Pasted image 20260105011802.png>)
+    ![screen](<./misc/images/Pasted image 20260105011802.png>)
     *Назначение sudo(superuser do или же substitute user and do): Безопасное выполнение административных команд с временным повышением привилегий от имени суперпользователя (root).
      -- это повышает безопасность системы, минимизирует риски и предоставляет гибкий аудит дейтствий.*
 
 3.  **Смена hostname:**
     Выполнена команда ``sudo hostnamectl set-hostname blainbatmachine-1``.
-    ![screen](<../misc/images/Pasted image 20260105011928.png>)
+    ![screen](<./misc/images/Pasted image 20260105011928.png>)
 
     Выполнена проверка командой ``hostnamectl``
-    ![screen](<../misc/images/Pasted image 20260105011943.png>)
-    Внесены изменения в ``/etc/hosts``.        ![screen](<../misc/images/Pasted image 20251218171002.png>)
+    ![screen](<./misc/images/Pasted image 20260105011943.png>)
+    Внесены изменения в ``/etc/hosts``.        ![screen](<./misc/images/Pasted image 20251218171002.png>)
     Старая версия.
     
-    ![screen](<../misc/images/Pasted image 20260105012115.png>)
+    ![screen](<./misc/images/Pasted image 20260105012115.png>)
     Новая версия.
     Перезапущена службы имён командой ``sudo systemctl restart systemd-hostnamed``
     
     Проверено новое Hostname с помощью 
     ``ping -c 3 blainbatmachine-1``
-    ![screen](<../misc/images/Pasted image 20260105012234.png>)
+    ![screen](<./misc/images/Pasted image 20260105012234.png>)
     Ping успешен.
 
 4.  **Результат:**
     Команда ``hostname`` показывает новое имя: ``blainbatmachine-1``.
-    ![screen](<../misc/images/Pasted image 20260105012248.png>)
+    ![screen](<./misc/images/Pasted image 20260105012248.png>)
 
 ## Part 6. Установка и настройка службы времени
 
@@ -257,11 +257,11 @@
     - ``NTPSynchronized=yes``
 
     - ``NTP=yes``
-    ![screen](<../misc/images/Pasted image 20260105012318.png>)
+    ![screen](<./misc/images/Pasted image 20260105012318.png>)
 
 2.  **Проверка времени:**
     Команда ``timedatectl`` подтверждает корректное время и статус ``System clock synchronized: yes``.
-    ![screen](<../misc/images/Pasted image 20260105012949.png>)
+    ![screen](<./misc/images/Pasted image 20260105012949.png>)
 
 
 
@@ -280,68 +280,68 @@
 ``touch test_nano.txt``
 ``touch test_mcedit.txt``
 
-![screen](<../misc/images/Pasted image 20260105013356.png>)
+![screen](<./misc/images/Pasted image 20260105013356.png>)
 были созданы файлы для начала выполнения задания.
 
-![screen](<../misc/images/Pasted image 20260105013405.png>)
+![screen](<./misc/images/Pasted image 20260105013405.png>)
 
 **1.1. VIM**
 
 - Файл открыт: ``sudo vim test_vim.txt``.
 
-- ![screen](<../misc/images/Pasted image 20251220133308.png>)
+- ![screen](<./misc/images/Pasted image 20251220133308.png>)
 
-- **Способ ввода:** Переход в режим вставки (I),![screen](<../misc/images/Pasted image 20251220133409.png>) ввод никнейма.
+- **Способ ввода:** Переход в режим вставки (I),![screen](<./misc/images/Pasted image 20251220133409.png>) ввод никнейма.
 
-- ![screen](<../misc/images/Pasted image 20260105013532.png>)
+- ![screen](<./misc/images/Pasted image 20260105013532.png>)
 
 - **Способ сохранения и выхода:** Переход в командный режим (``Esc``), ввод команды ``:wq`` (Write Quit).
 
-- ![screen](<../misc/images/Pasted image 20251220133610.png>)
+- ![screen](<./misc/images/Pasted image 20251220133610.png>)
 
-- ![screen](<../misc/images/Pasted image 20251220133649.png>)
+- ![screen](<./misc/images/Pasted image 20251220133649.png>)
   
 
 **1.2. NANO**
 
 - Файл открыт: ``sudo nano test_nano.txt``.
 
-- ![screen](<../misc/images/Pasted image 20251220140118.png>)
+- ![screen](<./misc/images/Pasted image 20251220140118.png>)
 
-- ![screen](<../misc/images/Pasted image 20251220140123.png>)
+- ![screen](<./misc/images/Pasted image 20251220140123.png>)
 
 - **Способ ввода:** Режим вставки активен по-умолчанию, ввод никнейма.
 
-- ![screen](<../misc/images/Pasted image 20251220140318.png>)
+- ![screen](<./misc/images/Pasted image 20251220140318.png>)
 
 - **Способ сохранения и выхода:** Сохранение через ``Ctrl+O`` -> ``Enter``. 
 
-- ![screen](<../misc/images/Pasted image 20251220140437.png>)Выход через ``Ctrl+X``.
+- ![screen](<./misc/images/Pasted image 20251220140437.png>)Выход через ``Ctrl+X``.
 
-- ![screen](<../misc/images/Pasted image 20251220140457.png>)
+- ![screen](<./misc/images/Pasted image 20251220140457.png>)
 
-- ![screen](<../misc/images/Pasted image 20251220140546.png>)
+- ![screen](<./misc/images/Pasted image 20251220140546.png>)
   
 
 **1.3. MCEDIT**
 
 - Файл открыт: ``sudo mcedit test_mcedit.txt``.
 
-- ![screen](<../misc/images/Pasted image 20251220140720.png>)
+- ![screen](<./misc/images/Pasted image 20251220140720.png>)
 
-- ![screen](<../misc/images/Pasted image 20251220140732.png>)
+- ![screen](<./misc/images/Pasted image 20251220140732.png>)
 
 - **Способ ввода:** Режим вставки активен по-умолчанию, ввод никнейма.
 
-                                            - ![screen](<../misc/images/Pasted image 20251220143017.png>)
+                                            - ![screen](<./misc/images/Pasted image 20251220143017.png>)
 - 
 
 - **Способ сохранения и выхода:** Сохранение через ``F2`` (Save) -> подтверждение. 
 
-- ![screen](<../misc/images/Pasted image 20251220141211.png>)
+- ![screen](<./misc/images/Pasted image 20251220141211.png>)
 
 - Выход через ``F10`` (Quit).
-  ![screen](<../misc/images/Pasted image 20251220143057.png>)
+  ![screen](<./misc/images/Pasted image 20251220143057.png>)
 
 ---
 
@@ -353,32 +353,32 @@
 
 - Изменен текст.
 
-- ![screen](<../misc/images/Pasted image 20251220144536.png>)
+- ![screen](<./misc/images/Pasted image 20251220144536.png>)
 
 - **Способ выхода без сохранения:** Переход в командный режим (``Esc``), ввод команды ``:q!`` (Quit Force) и ``Enter``.
-  ![screen](<../misc/images/Pasted image 20251220144708.png>)
+  ![screen](<./misc/images/Pasted image 20251220144708.png>)
 
 **2.2. NANO**
 
 - Изменен текст.
 
-- ![screen](<../misc/images/Pasted image 20251220144855.png>)
+- ![screen](<./misc/images/Pasted image 20251220144855.png>)
 
 - **Способ выхода без сохранения:** Нажатие ``Ctrl+X``, при запросе сохранения ("Save modified buffer?") выбрано ``N`` (No).
 
-- ![screen](<../misc/images/Pasted image 20251220145015.png>)
-  ![screen](<../misc/images/Pasted image 20251220145153.png>)
+- ![screen](<./misc/images/Pasted image 20251220145015.png>)
+  ![screen](<./misc/images/Pasted image 20251220145153.png>)
 
 **2.3. MCEDIT**
 
 - Изменен текст.
 
-- ![screen](<../misc/images/Pasted image 20251220145318.png>)
+- ![screen](<./misc/images/Pasted image 20251220145318.png>)
 
 - **Способ выхода без сохранения:** Нажатие ``F10``, в окне подтверждения выбрано ``No``.
-  ![screen](<../misc/images/Pasted image 20251220145410.png>)
+  ![screen](<./misc/images/Pasted image 20251220145410.png>)
 
-- ![screen](<../misc/images/Pasted image 20251220145442.png>)
+- ![screen](<./misc/images/Pasted image 20251220145442.png>)
 
 ---
 
@@ -390,76 +390,76 @@
 
 - Изменён текст на blainbat server
 
-- ![screen](<../misc/images/Pasted image 20251220150533.png>)
+- ![screen](<./misc/images/Pasted image 20251220150533.png>)
 -  **Замена:** Из Command-Line mode (:), использована команда ``:%s/server/ubuntu/g`` (замена всех вхождений ``server`` на ``ubuntu`` во всем файле).
-  ![screen](<../misc/images/Pasted image 20251220150841.png>)
+  ![screen](<./misc/images/Pasted image 20251220150841.png>)
 
-- ![screen](<../misc/images/Pasted image 20251220150857.png>)
+- ![screen](<./misc/images/Pasted image 20251220150857.png>)
 
 - **Поиск:** Из Normal mode (ESC). Использована команда ``/ubuntu``. При вводе слово выделилось. 
-  ![screen](<../misc/images/Pasted image 20251220151036.png>)
+  ![screen](<./misc/images/Pasted image 20251220151036.png>)
 
-- ![screen](<../misc/images/Pasted image 20251220151041.png>)
+- ![screen](<./misc/images/Pasted image 20251220151041.png>)
 
 - При нажатии ``ENTER`` курсор переместился на найденное слово.
 
-- ![screen](<../misc/images/Pasted image 20251220151058.png>)
+- ![screen](<./misc/images/Pasted image 20251220151058.png>)
 
 - **Способ сохранения и выхода:** Переход в командный режим (``Esc``), ввод команды ``:wq`` (Write Quit).
 
-- ![screen](<../misc/images/Pasted image 20251220151150.png>)
+- ![screen](<./misc/images/Pasted image 20251220151150.png>)
 
 **3.2. NANO**
 
 - Изменён текст на blainbat server.
 
-- ![screen](<../misc/images/Pasted image 20251220165301.png>)
+- ![screen](<./misc/images/Pasted image 20251220165301.png>)
 
 - **Поиск:** Использовано сочетание ``Ctrl+W`` (Where Is), введено искомое слово.
-  ![screen](<../misc/images/Pasted image 20251220165409.png>)
+  ![screen](<./misc/images/Pasted image 20251220165409.png>)
 
 - Слово было выделено при поиске.
 
-- ![screen](<../misc/images/Pasted image 20251220170350.png>)
+- ![screen](<./misc/images/Pasted image 20251220170350.png>)
 
 - **Замена:** Использовано сочетание ``Ctrl+\`` (Replace). Введено слово для поиска, затем слово для замены, подтверждено нажатием ``A`` (All).
 
-- ![screen](<../misc/images/Pasted image 20251220170456.png>)
-  ![screen](<../misc/images/Pasted image 20251220170534.png>)
+- ![screen](<./misc/images/Pasted image 20251220170456.png>)
+  ![screen](<./misc/images/Pasted image 20251220170534.png>)
 
-- ![screen](<../misc/images/Pasted image 20251220170551.png>)
+- ![screen](<./misc/images/Pasted image 20251220170551.png>)
 
-- ![screen](<../misc/images/Pasted image 20251220170605.png>)
+- ![screen](<./misc/images/Pasted image 20251220170605.png>)
   *Результат замены:*
-  ![screen](<../misc/images/Pasted image 20251220170813.png>)
+  ![screen](<./misc/images/Pasted image 20251220170813.png>)
 -  **Способ сохранения и выхода:** Сохранение через ``Ctrl+O`` -> ``Enter``. 
 
-- ![screen](<../misc/images/Pasted image 20251220170845.png>)
+- ![screen](<./misc/images/Pasted image 20251220170845.png>)
 
 **3.3. MCEDIT**
 
 - Текст изменён на blainbat server.
 
-- ![screen](<../misc/images/Pasted image 20251220171137.png>)
+- ![screen](<./misc/images/Pasted image 20251220171137.png>)
 
 - **Поиск:** Использована клавиша ``F7`` (Search), введено искомое слово ``-> Find all -> ENTER``
-  ![screen](<../misc/images/Pasted image 20251220171207.png>)
+  ![screen](<./misc/images/Pasted image 20251220171207.png>)
 
 - Была выделена строка со словом.
 
-- ![screen](<../misc/images/Pasted image 20251220171415.png>)
+- ![screen](<./misc/images/Pasted image 20251220171415.png>)
 
 - При повторном поиске через ``F7`` и ``OK -> ENTER`` слово было выделено.
 
 - **Замена:** Использована клавиша ``F4`` (Replace). Введены параметры поиска и замены, нажато ``Replace``, введено слово для замены, замена подтверждена.
 
-- ![screen](<../misc/images/Pasted image 20251220171612.png>)
+- ![screen](<./misc/images/Pasted image 20251220171612.png>)
 
-- ![screen](<../misc/images/Pasted image 20251220171731.png>)
-  ![screen](<../misc/images/Pasted image 20251220171704.png>)
+- ![screen](<./misc/images/Pasted image 20251220171731.png>)
+  ![screen](<./misc/images/Pasted image 20251220171704.png>)
 -  **Способ сохранения и выхода:** Сохранение через ``F2`` (Save) -> подтверждение.  Выход через ``F10``.
 
-- ![screen](<../misc/images/Pasted image 20251220171830.png>)
+- ![screen](<./misc/images/Pasted image 20251220171830.png>)
 
 ## Part 8. Установка и базовая настройка сервиса SSHD
 
@@ -468,18 +468,18 @@
 - Обновление пакетов и установка ``openssh-server``:
   ``sudo apt update``
   ``sudo apt install openssh-server``
-  ![screen](<../misc/images/Pasted image 20260105014650.png>)
+  ![screen](<./misc/images/Pasted image 20260105014650.png>)
 
 **2. Настройка автозагрузки.**
 
 - Добавление службы в автозагрузку командой ``sudo systemctl enable ssh``:
-  ![screen](<../misc/images/Pasted image 20260105015706.png>)
+  ![screen](<./misc/images/Pasted image 20260105015706.png>)
 
 - Запуск службы командой ``sudo systemctl start ssh``:
-  ![screen](<../misc/images/Pasted image 20260105015754.png>)
+  ![screen](<./misc/images/Pasted image 20260105015754.png>)
 
 - Проверка статуса командой ``systemctl status ssh`` (Active: active (running)):
-  ![screen](<../misc/images/Pasted image 20260105015859.png>)
+  ![screen](<./misc/images/Pasted image 20260105015859.png>)
 
 **3. Перенастройка порта на 2022.**
 
@@ -489,10 +489,10 @@
 
 
 - ``sudo nano /etc/ssh/sshd_config``
-  ![screen](<../misc/images/Pasted image 20260105020113.png>)
+  ![screen](<./misc/images/Pasted image 20260105020113.png>)
 
 - Параметр ``Port 22`` раскомментирован и изменен на ``Port 2022``:
-  ![screen](<../misc/images/Pasted image 20251223012752.png>)
+  ![screen](<./misc/images/Pasted image 20251223012752.png>)
 
 - Сохранён файл с помощью ``CTRL+O -> ENTER``
 
@@ -500,12 +500,12 @@
 
 - Перезапуск службы для применения изменений:
   ``sudo systemctl restart ssh``
-  ![screen](<../misc/images/Pasted image 20260105020217.png>)
+  ![screen](<./misc/images/Pasted image 20260105020217.png>)
 
 **4. Проверка процесса sshd.**
 
 - Выполнена команда ``ps -aux | grep sshd``:
-  ![screen](<../misc/images/Pasted image 20260105022819.png>)
+  ![screen](<./misc/images/Pasted image 20260105022819.png>)
 
 - **Пояснения:**
 
@@ -522,14 +522,14 @@
 **5. Перезагрузка и проверка netstat.**
 
 - Система перезагружена командой ``sudo reboot``. Наблюдаем применение изменений изменения Hostname из pt.5 задания.
-  ![screen](<../misc/images/Pasted image 20260105023424.png>)
+  ![screen](<./misc/images/Pasted image 20260105023424.png>)
 
 - Установка утилиты netstat: ``sudo apt install net-tools``.
-  ![screen](<../misc/images/Pasted image 20260105023702.png>)
+  ![screen](<./misc/images/Pasted image 20260105023702.png>)
 
 - Проверка слушаемых портов командой ``netstat -tan``.
   Вывод содержит строку ``tcp 0 0 0.0.0.0:2022 0.0.0.0:* LISTEN``.
-  ![screen](<../misc/images/Pasted image 20260105023727.png>)
+  ![screen](<./misc/images/Pasted image 20260105023727.png>)
 
 **6. Пояснения к netstat:**
 
@@ -564,7 +564,7 @@
 **1. Утилита TOP.**
 
 - Запуск командой ``top``.
-  ![screen](<../misc/images/Pasted image 20260105053426.png>)
+  ![screen](<./misc/images/Pasted image 20260105053426.png>)
 
 - **Метрики:**
 
@@ -581,10 +581,10 @@
   - memory: 134.9 MiB used / 1982.4 MiB. (Мебибайты) -- 134.9 * 2^20 = 1024*1024 байт.
 
 - Сортировка по памяти -- ``SHIFT+M`` (PID процесса с макс. памятью -- 1599 -- snapd):
-  ![screen](<../misc/images/Pasted image 20260105062349.png>)
+  ![screen](<./misc/images/Pasted image 20260105062349.png>)
 
 - Сортировка по процессорному времени -- ``SHIFT + T`` (PID процесса с макс. CPU -- 374 -- kworker):
-  ![screen](<../misc/images/Pasted image 20260105062653.png>)
+  ![screen](<./misc/images/Pasted image 20260105062653.png>)
 
 - Также есть сортировка по загрузке CPU -- ``SHIFT + P``. Выход из программы на ``q``.
 
@@ -599,28 +599,28 @@
 
 
 
-    - ![screen](<../misc/images/Pasted image 20260105063243.png>)
+    - ![screen](<./misc/images/Pasted image 20260105063243.png>)
 
     - Сортировка по CPU:
 
 
 
 
-    - ![screen](<../misc/images/Pasted image 20260105063311.png>)
+    - ![screen](<./misc/images/Pasted image 20260105063311.png>)
 
     - Сортировка по PERCENT_MEM:
 
 
 
 
-    - ![screen](<../misc/images/Pasted image 20260105063334.png>)
+    - ![screen](<./misc/images/Pasted image 20260105063334.png>)
 
     - Сортировка по TIME:
 
 
 
 
-    - ![screen](<../misc/images/Pasted image 20260105063405.png>)
+    - ![screen](<./misc/images/Pasted image 20260105063405.png>)
 
 - Фильтр по процессу ``sshd``:
 
@@ -629,7 +629,7 @@
 
     - F4(Filter) и ввод ``sshd``
 
-    - ![screen](<../misc/images/Pasted image 20260105063512.png>)
+    - ![screen](<./misc/images/Pasted image 20260105063512.png>)
 
     - Процесс найден.
 
@@ -640,7 +640,7 @@
 
     - ``F3``(Search) и ввод ``syslog``
 
-    - ![screen](<../misc/images/Pasted image 20260105063727.png>)
+    - ![screen](<./misc/images/Pasted image 20260105063727.png>)
 
 - Добавление метрик (hostname, clock, uptime):
 
@@ -650,23 +650,23 @@
 
     - Выбор в Available meters: clock, hostname, uptime
 
-    - ![screen](<../misc/images/Pasted image 20260105063941.png>)
+    - ![screen](<./misc/images/Pasted image 20260105063941.png>)
 
-    - ![screen](<../misc/images/Pasted image 20260105064006.png>)
+    - ![screen](<./misc/images/Pasted image 20260105064006.png>)
 
-    - ![screen](<../misc/images/Pasted image 20260105064102.png>)
+    - ![screen](<./misc/images/Pasted image 20260105064102.png>)
 
-    - ![screen](<../misc/images/Pasted image 20260105064114.png>)
+    - ![screen](<./misc/images/Pasted image 20260105064114.png>)
 
     - ``F5`` (Add): добавляем параметры в левую колонку. 
 
     - ``F10`` (Done): Применение изменений.
 
-    - ![screen](<../misc/images/Pasted image 20260105064220.png>)
+    - ![screen](<./misc/images/Pasted image 20260105064220.png>)
 
     - Итог редактирования и добавления колонок в интерфейсе программы
 
-    - ![screen](<../misc/images/Pasted image 20260105064303.png>)
+    - ![screen](<./misc/images/Pasted image 20260105064303.png>)
 
 - Выход: ``F10``.
 
@@ -674,7 +674,7 @@
 
 
 - Выполнена команда ``sudo fdisk -l``.
-  ![screen](<../misc/images/Pasted image 20260105064638.png>)
+  ![screen](<./misc/images/Pasted image 20260105064638.png>)
 
 - **Данные:**
 
@@ -689,7 +689,7 @@
       - Так как в моем варианте установленной на virtualbox Ubuntu -- swap размечен как файл, а не как раздел. 
       -  free -- команда показывает состояние оперативной памяти и файла подкачки из ядра (/proc/meminfo)
 
-      - ![screen](<../misc/images/Pasted image 20260105065729.png>)
+      - ![screen](<./misc/images/Pasted image 20260105065729.png>)
 
 ## Part 11. Использование утилиты df
 
@@ -697,7 +697,7 @@
 
 
 - Выполнена команда ``sudo df``.
-  ![screen](<../misc/images/Pasted image 20260105070053.png>)
+  ![screen](<./misc/images/Pasted image 20260105070053.png>)
 
 
 - **Информация для корневого раздела (mounted on ``/``):**
@@ -725,7 +725,7 @@
 
   - Ключ ``-h``: выводит размеры в человек читаемом виде.
 
-  - ![screen](<../misc/images/Pasted image 20260105070615.png>)
+  - ![screen](<./misc/images/Pasted image 20260105070615.png>)
 
 
 - **Информация для корневого раздела (mounted on ``/``):**
@@ -748,7 +748,7 @@
 **1. Запуск команды du.**
 
 - Выполнена команда ``sudo du``.
-  ![screen](<../misc/images/Pasted image 20260105084911.png>)
+  ![screen](<./misc/images/Pasted image 20260105084911.png>)
 
 **2. Вывод размера папок (/home, /var, /var/log).**
 
@@ -759,20 +759,20 @@
   - Ключ ``-s`` (summary): выводить только итоговый размер для указанных аргументов.
 
   - Ключ ``-b`` (bytes): размер в байтах.
-  ![screen](<../misc/images/Pasted image 20260105090007.png>)
+  ![screen](<./misc/images/Pasted image 20260105090007.png>)
 
 
 - **В человек читаемом виде:**
   Выполнена команда ``sudo du -sh /home /var/log /var``.
 
   - Ключ ``-h`` (human-readable): размер в K, M, G.
-  ![screen](<../misc/images/Pasted image 20260105090112.png>)
+  ![screen](<./misc/images/Pasted image 20260105090112.png>)
 
 **3. Вывод содержимого /var/log.**
 
 - Вывод размера каждого вложенного элемента в ``/var/log`` с использованием маски ``*``.
   Команда: ``sudo du -h /var/log/*``.
-  ![screen](<../misc/images/Pasted image 20260105091407.png>)
+  ![screen](<./misc/images/Pasted image 20260105091407.png>)
 ## Part 13. Установка и использование утилиты ncdu
 
 
@@ -785,7 +785,7 @@
 
 - ``sudo ncdu /var``
 
-- ![screen](<../misc/images/Pasted image 20260105091159.png>)
+- ![screen](<./misc/images/Pasted image 20260105091159.png>)
 
     - размер /var: 1.0 GiB.
 
@@ -798,7 +798,7 @@
 
 - ``sudo ncdu /home``
 
-- ![screen](<../misc/images/Pasted image 20260105091932.png>)
+- ![screen](<./misc/images/Pasted image 20260105091932.png>)
 
     - Размер /home -- 84.0 KiB.
 
@@ -813,21 +813,21 @@
 
     - sudo less /var/log/dmesg
 
-        - ![screen](<../misc/images/Pasted image 20260105092340.png>)
+        - ![screen](<./misc/images/Pasted image 20260105092340.png>)
 
     - sudo less /var/log/syslog
 
-        - ![screen](<../misc/images/Pasted image 20260105092439.png>)
+        - ![screen](<./misc/images/Pasted image 20260105092439.png>)
 
     - sudo less /var/log/auth.log
 
-        - ![screen](<../misc/images/Pasted image 20260105092550.png>)
+        - ![screen](<./misc/images/Pasted image 20260105092550.png>)
 
 2.  **Поиск последней успешной авторизации:**
 
 - Команда ``grep -a "login" /var/log/auth.log | tail -n 5``.
 
-- ![screen](<../misc/images/Pasted image 20260105094002.png>)
+- ![screen](<./misc/images/Pasted image 20260105094002.png>)
 
 - Данные найдены в последних двух строчках:
 
@@ -844,11 +844,11 @@
 
 - Служба перезапущена командой ``sudo systemctl restart sshd``. 
 
-- ![screen](<../misc/images/Pasted image 20260105094304.png>)
+- ![screen](<./misc/images/Pasted image 20260105094304.png>)
 
 - **Сообщение о рестарте в логах:** Выполнен поиск в ``syslog``: ``grep -a "ssh" /var/log/syslog | tail -n 20``. Найдена запись ``ssh.service: Succeeded`` с актуальным временем.
 
-- ![screen](<../misc/images/Pasted image 20260105094558.png>)
+- ![screen](<./misc/images/Pasted image 20260105094558.png>)
 
 ## Part 15. Использование планировщика заданий CRON
 
@@ -880,7 +880,7 @@
 
     - Команда ``crontab -l`` (список пуст).
 
-    - ![screen](<../misc/images/Pasted image 20260106122327.png>)
+    - ![screen](<./misc/images/Pasted image 20260106122327.png>)
 
 - Поиск полного пути к команде uptime:
 
@@ -891,16 +891,16 @@
 
     - Результат ``/usr/bin/uptime``.
 
-    - ![screen](<../misc/images/Pasted image 20260106122516.png>)
+    - ![screen](<./misc/images/Pasted image 20260106122516.png>)
 
 **3. Настройка задания.**
 
 - Открытие редактора:
       Команда ``crontab -e`` (выбран редактор nano: 1).
 
-    - ![screen](<../misc/images/Pasted image 20260106122821.png>)
+    - ![screen](<./misc/images/Pasted image 20260106122821.png>)
 
-    - ![screen](<../misc/images/Pasted image 20260106122931.png>)
+    - ![screen](<./misc/images/Pasted image 20260106122931.png>)
 
 - Добавление задачи:
 
@@ -911,7 +911,7 @@
 
     - *Значение:* Выполнять команду ``/usr/bin/uptime`` каждую 2-ю минуту.
 
-    - ![screen](<../misc/images/Pasted image 20260106123226.png>)
+    - ![screen](<./misc/images/Pasted image 20260106123226.png>)
 
 - Проверка сохранения:
 
@@ -920,7 +920,7 @@
 
     - Команда ``crontab -l`` отображает добавленную задачу.
 
-    - ![screen](<../misc/images/Pasted image 20260106123526.png>)
+    - ![screen](<./misc/images/Pasted image 20260106123526.png>)
 
 **4. Проверка выполнения (Просмотр логов).**
 
@@ -931,7 +931,7 @@
 
     - Команда ``grep -a CRON /var/log/syslog``.
 
-    - ![screen](<../misc/images/Pasted image 20260106124611.png>)
+    - ![screen](<./misc/images/Pasted image 20260106124611.png>)
 
 - **Анализ логов:**
 
@@ -948,7 +948,7 @@
 
     - Команда ``crontab -r``.
 
-    - ![screen](<../misc/images/Pasted image 20260106125243.png>)
+    - ![screen](<./misc/images/Pasted image 20260106125243.png>)
 
 - Финальная проверка:
 
@@ -957,4 +957,4 @@
 
     - Команда ``crontab -l`` подтверждает отсутствие задач (``no crontab for user``).
 
-    - ![screen](<../misc/images/Pasted image 20260106125342.png>)
+    - ![screen](<./misc/images/Pasted image 20260106125342.png>)
